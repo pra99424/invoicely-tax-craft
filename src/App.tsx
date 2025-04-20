@@ -10,6 +10,9 @@ import ProfileCreate from "./pages/ProfileCreate";
 import ProfileEdit from "./pages/ProfileEdit";
 import Dashboard from "./pages/Dashboard";
 import InvoiceCreate from "./pages/InvoiceCreate";
+import Invoices from "./pages/Invoices";
+import Clients from "./pages/Clients";
+import ClientAdd from "./pages/ClientAdd";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +31,9 @@ const App = () => (
           <Route path="/profile/edit" element={<ProfileEdit />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/invoice/new" element={<InvoiceCreate />} />
+          <Route path="/invoices" element={<Invoices />} />
+          <Route path="/clients" element={<Clients />} />
+          <Route path="/clients/add" element={<ClientAdd />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
