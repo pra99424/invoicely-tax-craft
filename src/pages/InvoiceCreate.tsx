@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -9,7 +8,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Separator } from "@/components/ui/separator";
 import { jsPDF } from "jspdf";
-import 'jspdf-autotable';
+import { FilePdf, Save } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import autoTable from 'jspdf-autotable';
 
 // This is a mock profile data that would normally come from a database
 const mockProfile = {
@@ -39,6 +40,7 @@ interface InvoiceItem {
 
 const InvoiceCreate = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [invoiceNumber, setInvoiceNumber] = useState<string>("INV-001");
   const [invoiceDate, setInvoiceDate] = useState<string>(new Date().toISOString().split('T')[0]);
   const [bookNumber, setBookNumber] = useState<string>("");
@@ -144,8 +146,11 @@ const InvoiceCreate = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Here you would normally save the invoice to the database
-    // For now, we'll just simulate a download and navigation
     generatePDF();
+    toast({
+      title: "Invoice saved and downloaded",
+      description: `Invoice ${invoiceNumber} has been processed successfully.`,
+    });
     navigate("/dashboard");
   };
   
@@ -210,7 +215,7 @@ const InvoiceCreate = () => {
     doc.line(10, 145, 200, 145);
     
     // Items table
-    (doc as any).autoTable({
+    autoTable(doc, {
       startY: 150,
       head: [['S.No.', 'Description of Goods', 'HSN Code', 'Quantity', 'Rate', 'Amount (₹)']],
       body: items.map((item, index) => [
@@ -667,11 +672,21 @@ const InvoiceCreate = () => {
             </Button>
             
             <div className="space-x-4">
-              <Button type="button" variant="outline" className="border-purple-600 text-purple-600" onClick={generatePDF}>
+              <Button 
+                type="button" 
+                variant="outline" 
+                className="border-purple-600 text-purple-600 flex items-center gap-2" 
+                onClick={generatePDF}
+              >
+                <FilePdf className="h-4 w-4" />
                 Preview PDF
               </Button>
               
-              <Button type="submit" className="bg-purple-600 hover:bg-purple-700">
+              <Button 
+                type="submit" 
+                className="bg-purple-600 hover:bg-purple-700 flex items-center gap-2"
+              >
+                <Save className="h-4 w-4" />
                 Save & Download Invoice
               </Button>
             </div>
