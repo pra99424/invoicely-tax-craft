@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,6 +7,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ProfileCreate from "./pages/ProfileCreate";
+import ProfileEdit from "./pages/ProfileEdit";
 import Dashboard from "./pages/Dashboard";
 import InvoiceCreate from "./pages/InvoiceCreate";
 import NotFound from "./pages/NotFound";
@@ -23,6 +25,7 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile/create" element={<ProfileCreate />} />
+          <Route path="/profile/edit" element={<ProfileEdit />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/invoice/new" element={<InvoiceCreate />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
