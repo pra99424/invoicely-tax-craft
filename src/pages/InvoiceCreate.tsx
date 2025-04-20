@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Separator } from "@/components/ui/separator";
 import { jsPDF } from "jspdf";
-import { FilePdf, Save } from "lucide-react";
+import { File, Save } from "lucide-react";  // Changed FilePdf to File
 import { useToast } from "@/hooks/use-toast";
 import autoTable from 'jspdf-autotable';
 
@@ -52,7 +52,7 @@ const InvoiceCreate = () => {
   // Billed To details
   const [billedToName, setBilledToName] = useState<string>("");
   const [billedToGstin, setBilledToGstin] = useState<string>("");
-  const [billedToAddress, setBilledToAddress] = useState<string>("");
+  const [billedToAddress, setBilledToAddress = useState<string>("");
   const [billedToState, setBilledToState] = useState<string>("");
   const [billedToStateCode, setBilledToStateCode] = useState<string>("");
   
@@ -678,7 +678,7 @@ const InvoiceCreate = () => {
                 className="border-purple-600 text-purple-600 flex items-center gap-2" 
                 onClick={generatePDF}
               >
-                <FilePdf className="h-4 w-4" />
+                <File className="h-4 w-4" />  {/* Replaced FilePdf with File */}
                 Preview PDF
               </Button>
               
